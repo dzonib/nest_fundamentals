@@ -19,7 +19,7 @@ import {
 export class CoffeesController {
   constructor(private readonly coffeeService: CoffeesService) {}
 
-  @Get('flavors')
+  @Get()
   // use native express response
   // best practice is to use nest standard aproach
   //   findAll(@Res() response) {
@@ -50,13 +50,14 @@ export class CoffeesController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCoffeeDto: UpdateCoffeeDto) {
+    console.log('HELOOO', id);
     return this.coffeeService.update(id, updateCoffeeDto);
     // return `This action updates #${id} coffee`;
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.coffeeService.delete(id);
+    return this.coffeeService.remove(id);
     // return `This action removes #${id} coffee`;
   }
 }
