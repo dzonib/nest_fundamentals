@@ -1,27 +1,34 @@
-import { CoffeesAndFlavors } from './coffeesAndFlavors.entity';
 import { Flavor } from './flavor.entity';
 import {
-  Table,
   Column,
-  Model,
-  PrimaryKey,
-  BelongsToMany,
-  AutoIncrement,
-} from 'sequelize-typescript';
+  Entity,
+  Index,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
-@Table
-export class Coffee extends Model {
-  @PrimaryKey
-  @AutoIncrement
-  @Column
+@Index(['name'])
+@Entity()
+export class Coffee {
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @Column
+  @Column()
   name: string;
 
-  @Column
+  @Column({ nullable: true })
+  description: string;
+
+  @Column()
   brand: string;
 
-  @BelongsToMany(() => Flavor, () => CoffeesAndFlavors)
-  flavors: string[];
+  @Column({ default: 0 })
+  recommendations: number;
+
+  @JoinTable()
+  @ManyToMany((type) => Flavor, (flavor) => flavor.coffees, {
+    cascade: true, //['insert'] only insert or some other property
+  })
+  flavors: Flavor[];
 }

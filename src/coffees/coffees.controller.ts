@@ -14,6 +14,7 @@ import {
   Query,
   //   Res
 } from '@nestjs/common';
+import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 
 @Controller('coffees')
 export class CoffeesController {
@@ -23,11 +24,11 @@ export class CoffeesController {
   // use native express response
   // best practice is to use nest standard aproach
   //   findAll(@Res() response) {
-  findAll(@Query() paginationQuery) {
+  findAll(@Query() paginationQuery: PaginationQueryDto) {
     const { limit, offset } = paginationQuery;
     // express native response
     // response.status(200).send(`This action returnst all coffies flavors`);
-    return this.coffeeService.findAll();
+    return this.coffeeService.findAll(paginationQuery);
     // return `This action returnst all coffies flavors. Limit ${limit}, offset: ${offset}`;
   }
 

@@ -15,6 +15,9 @@ async function bootstrap() {
       // and transforms query parameters to wanted type (from string to number)
       // it can slightly affect preformance
       transform: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
     }),
   );
   await app.listen(3000);
