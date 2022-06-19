@@ -22,14 +22,14 @@ export class CoffeesController {
 
   @Get()
   // use native express response
-  // best practice is to use nest standard aproach
+  // best practice is to use nest standard approach
   //   findAll(@Res() response) {
   findAll(@Query() paginationQuery: PaginationQueryDto) {
     const { limit, offset } = paginationQuery;
     // express native response
-    // response.status(200).send(`This action returnst all coffies flavors`);
+    // response.status(200).send(`This action returns all coffees flavors`);
     return this.coffeeService.findAll(paginationQuery);
-    // return `This action returnst all coffies flavors. Limit ${limit}, offset: ${offset}`;
+    // return `This action returns all coffees flavors. Limit ${limit}, offset: ${offset}`;
   }
 
   @Get(':id')
